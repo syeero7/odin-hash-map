@@ -1,4 +1,5 @@
 import HashMap from "./HashMap.js";
+import HashSet from "./HashSet.js";
 
 const map = new HashMap();
 
@@ -46,3 +47,14 @@ console.log(map.values());
 console.log(map.entries());
 map.clear();
 console.log(map.length);
+
+const set = new HashSet();
+
+set.set("apple");
+set.set("orange");
+set.set("car");
+console.log(set.keys());
+console.log(set.length);
+console.log(set.has("car"));
+console.log(set.remove("car"));
+console.log(set.has("car"));
