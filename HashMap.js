@@ -35,21 +35,28 @@ export default class HashMap {
     this.#throwIfRestricted(index);
     let bucket = this.#buckets[index];
 
+    if (key === "lion" || key === "hat") {
+      console.log({ key, index });
+    }
+
     if (!bucket) {
       this.#buckets[index] = { key, value };
       return;
     }
 
-    if (bucket.key === key) {
-      bucket.value = value;
-      return;
-    }
+    do {
+      if (bucket.key === key) {
+        bucket.value = value;
+        return;
+      }
 
-    while (bucket.next) {
+      if (!bucket.next) {
+        bucket.next = { key, value };
+        return;
+      }
+
       bucket = bucket.next;
-    }
-
-    bucket.next = { key, value };
+    } while (bucket);
   }
 
   get(key) {
