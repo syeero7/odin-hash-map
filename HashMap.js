@@ -35,10 +35,6 @@ export default class HashMap {
     this.#throwIfRestricted(index);
     let bucket = this.#buckets[index];
 
-    if (key === "lion" || key === "hat") {
-      console.log({ key, index });
-    }
-
     if (!bucket) {
       this.#buckets[index] = { key, value };
       return;
@@ -63,6 +59,7 @@ export default class HashMap {
     const index = this.#hash(key);
     this.#throwIfRestricted(index);
     let bucket = this.#buckets[index];
+    if (!bucket) return null;
 
     do {
       if (bucket.key === key) return bucket.value;
@@ -76,6 +73,7 @@ export default class HashMap {
     const index = this.#hash(key);
     this.#throwIfRestricted(index);
     let bucket = this.#buckets[index];
+    if (!bucket) return false;
 
     do {
       if (bucket.key === key) return true;
@@ -88,8 +86,9 @@ export default class HashMap {
   remove(key) {
     const index = this.#hash(key);
     this.#throwIfRestricted(index);
-    let bucket = this.#buckets[index];
     let previous = null;
+    let bucket = this.#buckets[index];
+    if (!bucket) return false;
 
     do {
       if (bucket.key === key) {
